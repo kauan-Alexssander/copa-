@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobertura Oficial - Copa do Mundo</title>
+    
+    <style>
+        /* ==========================================================================
+           RESET E CONFIGURAÇÕES GERAIS
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f7f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           CABEÇALHO (HEADER)
+           ========================================================================== */
+        .main-header {
+            background-color: #0b2512; /* Verde bem escuro premium */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-header .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .main-header .logo span {
+            color: #ffcc00; /* Detalhe em Ouro */
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #ffcc00;
+        }
+
+        /* ==========================================================================
+           ÁREA DE DESTAQUE (HERO SECTION COM VÍDEO)
+           ========================================================================== */
+        .hero-section {
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(11, 37, 18, 0.85));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            max-width: 750px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: #e0e0e0;
+        }
+
+        .btn-primary {
+            background-color: #ffcc00;
+            color: #0b2512;
+            padding: 14px 32px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s, background-color 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #ffe066;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           TABELA DE CLASSIFICAÇÃO
+           ========================================================================== */
+        .table-section {
+            padding: 60px 8% 40px;
+            text-align: center;
+        }
+
+        .table-section h2 {
+            font-size: 32px;
+            color: #0b2512;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .styled-table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 850px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .styled-table th {
+            background-color: #11421e;
+            color: #ffffff;
+            text-align: left;
+            padding: 16px 20px;
+            font-weight: 600;
+        }
+
+        .styled-table td {
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f9fbf9;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 3px solid #11421e;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: 500;
+        }
+        .styled-table tbody tr.active-row td:first-child {
+            border-left: 4px solid #ffcc00;
+        }
+
+        /* ==========================================================================
+           FORMULÁRIO DO TORCEDOR
+           ========================================================================== */
+        .form-section {
+            padding: 40px 8% 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .form-card h2 {
+            color: #0b2512;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .form-card p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .input-group input[type="email"] {
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input[type="email"]:focus {
+            border-color: #11421e;
+        }
+
+        .checkbox-container {
+            margin-bottom: 30px;
+        }
+
+        .checkbox-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px !important;
+            font-size: 14px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background-color: #f4f6f4;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .checkbox-label:hover {
+            background-color: #e2ede2;
+        }
+
+        .checkbox-label input {
+            accent-color: #11421e;
+            transform: scale(1.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #11421e;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0b2512;
+        }
+
+        /* ==========================================================================
+           RODAPÉ (FOOTER)
+           ========================================================================== */
+        .main-footer {
+            background-color: #0b2512;
+            color: #a0aab0;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* ==========================================================================
+           RESPONSIVIDADE BÁSICA (MOBILE)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">COPA<span>2026</span></div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#jogos">Jogos</a></li>
+                <li><a href="#classificacao">Classificação</a></li>
+                <li><a href="#inscricao">Notícias & Alertas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-playing-football-in-the-stadium-4655-large.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>O Coração do Mundo Bate em Campo</h1>
+                <p>Não perca nenhum lance. Acompanhe os melhores momentos e os placares em tempo real.</p>
+                <a href="#inscricao" class="btn-primary">Ativar Alertas de Jogos</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="classificacao" class="table-section">
+        <h2>Classificação de Momento — Grupo A</h2>
+        <p class="subtitle">Os dois melhores de cada grupo avançam para o mata-mata</p>
+        
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Seleção</th>
+                        <th>Pontos</th>
+                        <th>Vitórias</th>
+                        <th>Empates</th>
+                        <th>Derrotas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>1º</td>
+                        <td>🇧🇷 Brasil</td>
+                        <td>9</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>2º</td>
+                        <td>🇫🇷 França</td>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>3º</td>
+                        <td>🇦🇷 Argentina</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>4º</td>
+                        <td>🇯🇵 Japão</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="inscricao" class="form-section">
+        <div class="form-card">
+            <h2>Fique por Dentro!</h2>
+            <p>Escolha seus times favoritos e receba alertas de gols e início de partidas direto no seu e-mail.</p>
+            
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <label for="email">Seu melhor e-mail</label>
+                    <input type="email" id="email" placeholder="exemplo@torcedor.com" required>
+                </div>
+
+                <div class="checkbox-container">
+                    <p class="checkbox-title">Selecione as seleções para acompanhar:</p>
+                    
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="selecoes" value="brasil"> <span>Brasil</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="selecoes" value="argentina"> <span>Argentina</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="selecoes" value="franca"> <span>França</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Inscrever-se na Lista</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Emissora de Esportes Oficial. Todos os direitos reservados à cobertura da Copa.</p>
+    </footer>
+
+</body>
+</html>
